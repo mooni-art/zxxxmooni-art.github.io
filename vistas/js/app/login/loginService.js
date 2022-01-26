@@ -11,7 +11,7 @@ function loginServ($http,$q,$httpParamSerializerJQLike){
         $.ajax({
                     type: 'post',
                     data: {"user": users , "contraseña":pwd},
-                    url: '../controlador/login.php',
+                    url: 'http://mooni-art-soft.byethost9.com/ubikt/controlador/login.php',
                     async: false
         }).done(function(data){
                     dev = data;

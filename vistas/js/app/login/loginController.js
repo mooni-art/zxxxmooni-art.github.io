@@ -11,7 +11,7 @@
         function ingreaPrueba(){
             localStorage.setItem('user', "asfasf");
                     localStorage.setItem('rol',"ori") 
-                     window.location.href =" ../vistas/orientador.html"
+                     window.location.href =" ./vistas/orientador.html"
         }
         function ingresa(){
             if($scope.usuario == undefined || $scope.pwd == undefined){//no vacios
@@ -28,9 +28,9 @@
                         localStorage.setItem('user', $scope.usuario);
                         localStorage.setItem('rol',dev)
                         if(dev == "admin"){
-                            window.location =" ../vistas/admin.html"
+                            window.location ="./vistas/admin.html"
                         }else if(dev == "ori"){
-                            window.location =" ../vistas/orientador.html"
+                            window.location ="./vistas/orientador.html"
                         }
                 }
                 // }, 2000);
