@@ -1,0 +1,130 @@
+<!DOCTYPE html> 
+<html lang="es" ng-app="mooniart.ubikt">
+	<head>
+		<meta charset="UTF-8">
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.validate.js"></script>
+		<script src="js/angular.min.js"></script>
+		<script src="js/angular-cookies.min.js"></script>
+		<script src="js/angular-route.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/app/app.js"></script>
+		<script src="js/app/test/testCtrl.js"></script>
+		<script src="js/app/test/testServ.js"></script>
+		<script src="js/app/utils/utilsServ.js"></script>
+		<script src="js/app/directive/esperaDir.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/estiloGeneral.css"></link>
+		<title>Ubik-T: Test</title>
+	</head>
+	<body ng-controller="testCtrl as oc">
+			<modal-lapse mostrar="oc.modal"></modal-lapse>
+			<div class="row" id="">
+				<div class="col-sm-12 col-md-12 col-lg-12">
+					<img id="imgEnc" src="img/header.png">
+				</div>
+			</div>
+			<div class="row" ng-if="oc.inicio" id="cuerpo2">
+				<div class="col-sm-12 col-lg-12 col-md-12" >
+					<label class="titulo"><b>Test Ubikt</b></label>
+				</div>
+				<div class="col-sm-12 col-lg-7 col-md-12 text-center mb-5">
+						<input type="text" id="clave" class="inputGrande w-100" name="user" placeholder="Clave de ingreso" ng-model="oc.clave">
+				</div>
+				<div class="col-sm-12 col-lg-5 col-md-12 text-center mb-5">
+						<input type="button" id="btnBU" class="btnGrande btn btn-info w-100" value="Ingresar" ng-click="oc.ingresaAlumno()">
+				</div>
+			</div>
+			<div class="row" ng-if="oc.inicio == false" id="cuerpo5">
+				<div class="col-xs-12 col-lg-12 mt-2 datos " >
+					<label class="titulo">Datos del alumno</label>
+				</div>
+				<div class="col-lg-4 col-md-12 col-xs-12 datos">
+					<input type="text" id="nombre" name="nombre" class="inputBonito mt-1 mb-1 w-100" placeholder="Nombre(s)" readonly="true" ng-model="oc.nombre">
+				</div>
+				<div class="col-lg-4 col-xs-12 datos">
+					<input type="text" id="a_p" name="a_p" class="inputBonito mt-1 mb-1 w-100" placeholder="Apellido Paterno" readonly="true" ng-model="oc.ap">
+				</div>
+				<div class="col-lg-4 col-xs-12 datos">
+					<input type="text" id="a_m" name="a_m" class="inputBonito mt-1 mb-1 w-100" placeholder="Apellido Materno" readonly="true" ng-model="oc.am">
+				</div>
+				<div class="col-lg-4 col-xs-12 datos">
+					<input type="text" id="genero" name="genero" class="inputBonito mt-1 mb-1 w-100" placeholder="Genero" readonly="true" ng-model="oc.sexo">
+				</div>
+				<div class="col-lg-4 col-xs-12 datos">
+					<input type="text" id="grupo" name="grupo" class="inputBonito mt-1 mb-1 w-100" placeholder="Grupo" readonly="true" ng-model="oc.grupo">
+						<option>ukjbkij</option>
+					</select> -->
+				</div>
+				<div class="col-lg-4 col-xs-12 datos">
+					<input type="text" id="carrera" name="carrera" class="inputBonito mt-1 mb-1 mr-2 w-50" placeholder="¿Que carrera te gustaria estudiar?" title="Escribe que carrera te gustaria estudiar" ng-model="oc.carrera">
+					<button class="btn btn-primary mt-1 mb-1 btnMediano w-25" ng-click="oc.guardarCarrera()">Guardar</button>
+				</div>
+				<!-- mostrar/ocultar cosos -->
+				<div class="d-lg-none  col-sm-12 col-xs-12" style="border: 1px solid #ced4da">
+					<button ng-if="!oc.mostrarDatos" class="btn pss pss1 w-100 text-center" ng-click="oc.setMostrarDatos(true)"><img src="img/abajo_blanco.svg " class="img_dir" alt="Mostrar panel de datos" >Mostrar Datos</button>
+					<button ng-if="oc.mostrarDatos" class="btn pss pss1 w-100 text-center" ng-click="oc.setMostrarDatos(false)"><img src="img/arriba_blanco.svg" class="img_dir" alt="Mostrar panel de datos" >Ocultar Datos</button>
+				</div>
+				<div class="d-lg-none col-sm-12 col-xs-12" style="border: 1px solid #ced4da">
+					<button ng-if="!oc.mostrarPanel" class="btn pss pss1 w-100 text-center" ng-click="oc.setMostrarPanel(true)"><img src="img/abajo_blanco.svg" class="img_dir"  alt="Mostrar panel de preguntas" >Mostrar panel</button>
+					<button ng-if="oc.mostrarPanel" class="btn pss pss1 w-100 text-center" ng-click="oc.setMostrarPanel(false)"><img src="img/arriba_blanco.svg" class="img_dir"  alt="Mostrar panel de preguntas" >Ocultar panel</button>
+				</div>
+				<!-- fin mostrar/ocultar cosos -->
+				<!-- tabla -->
+				<div class="col-lg-5 col-md-12 col-xs-12 mw-100 mh-50 mr-5"  id="cuerpo3" >
+					<table  id="panel" ng-class="[table-responsive,{'table': oc.shT}]">
+						<thead>
+							<tr><th class="texti" colspan="10">Panel de Preguntas</th></tr>
+						</thead>
+						<tbody ng-repeat="x in oc.listaPreguntas">
+							<tr ng-if="($index%10) == 0">
+								<td  ng-repeat="p in oc.listaPreguntas.slice($parent.$index,$parent.$index + 10)"><button class="btn btn-primary border rounded" ng-class="{'btn-success': p.contestada,'btn-danger border-warning font-weight-bold text-ligth': p.numPregunta == oc.preguntaActual + 1}">{{p.numPregunta}}</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- fin tabla -->
+				<!-- Preguntas -->
+				<div class="col-lg-5 col-md-12 col-xs-12 w-100 mw-100 mh-50"  id="cuerpo4">
+					<input type="text" id="idalumno" style="display: none"></input>
+					<label class="col-lg-12 col-xs-12 texti_4 mt-5 text-center" style="border: 1px solid #ced4da">{{oc.preguntaActual + 1}}.&nbsp{{oc.listaPreguntas[oc.preguntaActual].pregunta}}</label>
+					<div class="col-lg-4 col-md-12 text-left" >
+						<input type="radio"  ng-model="oc.respuestaQ" id="respuesta1" name="respuesta" value="1"><label for="respuesta1" class="texti_1 w-75">
+						&nbspDesagrado
+						</label>
+					</div>
+					<div class="col-lg-4 col-md-12 text-left" >
+						<input type="radio" ng-model="oc.respuestaQ" id="respuesta2" name="respuesta" value="2"><label for="respuesta2" class="texti_1 w-75">
+						&nbspIndiferente
+						</label>
+					</div>
+					<div class="col-lg-4 col-md-12 text-left" >
+						<input type="radio" ng-model="oc.respuestaQ" id="respuesta3" name="respuesta" value="3"><label for="respuesta3" class="texti_1 w-75">
+						&nbspAgrado
+						</label>
+					</div>
+					<div class="col-lg-12 col-xs-12 text-right mb-2">
+						<input type="button" class="btn btn-info pss2" name="txt" value="Guardar" ng-click="oc.guardarRespuesta()">
+					</div>
+				</div>
+				<!-- fin preguntas -->
+			</div>
+		<div class="modal" id="modalInformacion">
+  			<div class="modal-dialog">
+    			<div class="modal-content">
+
+      				<div class="modal-header">
+        				<h4 class="modal-title">Estatus de la acción</h4>
+        				<button type="button" class="close" data-dismiss="modal">&times;</button>
+      				</div>
+      				<div class="modal-body">
+						<p class="text-info text-center texti_4">{{mensaje}}</p>
+      				</div>
+      				<div class="modal-footer">
+      					<button type="button" class="btn btn-success inputBonito" data-dismiss="modal" ng-click="oc.utilsServ.accion(accion)">OK</button>
+      				</div>
+    			</div>
+  			</div>
+		</div>
+	</body>
+</html>
